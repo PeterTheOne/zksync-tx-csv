@@ -16,6 +16,9 @@ async function start() {
       from = resultJson.result.list[resultJson.result.list.length - 1].txHash;
       txList = [...txList.slice(0, txList.length - 1), ...resultJson.result.list];
       console.log(`${txList.length} from ${resultJson.result.pagination.count}`);
+      if (resultJson.result.list.length === 1) {
+        success = false;
+      }
     }
     fs.writeFileSync('result.json', JSON.stringify(txList));
   } while (success);
